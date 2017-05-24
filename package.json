@@ -1,0 +1,23 @@
+{
+  "name": "luces",
+  "version": "1.0.0",
+  "description": "juegos de luces con arduino",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "arduino",
+    "p5js",
+    "javascript",
+    "johnny",
+    "five"
+  ],
+  "author": "Hernan Castilla - Dickson Ceron",
+  "license": "ISC",
+  "dependencies": {
+    "johnny-five": "^0.10.10",
+    "socket.io": "^1.7.3"
+  }
+}

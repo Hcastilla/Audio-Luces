@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Op</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.8/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.8/addons/p5.sound.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+
+    <style>
+        body{
+            margin:0px;
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+<body>
+    <script>
+        var socket = io('172.16.7.142:7000');
+        var mic;
+        function setup(){
+            createCanvas(windowWidth, windowHeight);
+            mic = new p5.AudioIn();
+            mic.start();
+
+        }
+
+        function draw(){
+            translate(width/2, height/2);
+
+            background('rgba(0, 0, 0, 0.3)');
+            
+            var vol =  mic.getLevel();
+            var val = parseInt(map(vol,0, 0.5, 1, 14));
+            
+            fill(255);
+
+            for(i = 200, j = 0; i >= 0, j<= val; i -= 25, j += 1){
+
+                rect(i, 10, 20, j*10);
+                
+            }
+
+
+            for(i = -200, j = 0; i <= 0, j<= val; i += 25, j += 1){
+
+                rect(i, 10, 20, -j*10);
+                
+            }
+            
+            socket.emit('data', val);
+        }
+    </script>
+</body>
+</html>
